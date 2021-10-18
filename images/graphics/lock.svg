@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="120px" height="148px" viewBox="0 0 120 148" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <title>lock</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M20,48 C20.5806452,16 34.2258065,1.93836569e-15 60.9354839,0 C87.6451613,0 101,16 101,48 L112,48 C116.418278,48 120,51.581722 120,56 L120,140 C120,144.418278 116.418278,148 112,148 L8,148 C3.581722,148 5.41083001e-16,144.418278 0,140 L0,56 C-5.41083001e-16,51.581722 3.581722,48 8,48 L20,48 Z M54,102.179195 L54,113.2 C54,115.850967 56.1490332,118 58.8,118 L62.2,118 C64.8509668,118 67,115.850967 67,113.2 L67,102.179195 C70.5979592,99.9845716 73,96.0227991 73,91.5 C73,84.5964406 67.4035594,79 60.5,79 C53.5964406,79 48,84.5964406 48,91.5 C48,96.0227991 50.4020408,99.9845716 54,102.179195 Z M60.7612903,17.6 C44.7354839,17.6 36.5483871,27.7333333 36.2,48 L84.8,48 C84.8,27.7333333 76.7870968,17.6 60.7612903,17.6 Z" id="path-1"></path>
+    </defs>
+    <g id="With-Design-Challenge" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Artboard-2" transform="translate(-21.000000, -13.000000)">
+            <g id="lock" transform="translate(21.000000, 13.000000)">
+                <mask id="mask-2" fill="white">
+                    <use xlink:href="#path-1"></use>
+                </mask>
+                <use id="Mask" fill="#FFFFFF" xlink:href="#path-1"></use>
+            </g>
+        </g>
+    </g>
+</svg>

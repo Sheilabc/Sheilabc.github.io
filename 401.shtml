@@ -1,0 +1,33 @@
+<style>
+body {
+ font-family:'Roboto Slab',Avenir, Arial;
+ font-size:1.2em;
+ font-weight:100;
+ color:white;
+ background-color:#45BFBF;
+ line-height:2em;
+}
+#parent {
+	display:table;
+	width:100%;
+	height:100%;
+}
+#child {
+	display:table-cell;
+	vertical-align:middle;
+ 	text-align:center;
+}
+a {
+	color:yellow;
+}
+</style>
+<DIV id="parent">
+	<div id="child">
+	<img src="http://www.sheilachristian.com/images/graphics/lock.svg" style="width:100px"><br/><br/>
+	<span style="font-weight:400; font-size:1.4em">401 - Unauthorized</span><br/>
+	<span style="font-family:Avenir">This is password-protected content. Feel free to check out <a href="http://www.sheilachristian.com">my public portfolio</a>.</span>
+	</div>
+</DIV>
+<!-- 
+                                                                                                                                                                                                                                                                                                                    
+--> 

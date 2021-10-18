@@ -1,0 +1,303 @@
+/* GENERAL */
+
+body {
+ font-family: 'Avenir', 'Nunito', Arial;
+ src: url('https://fonts.googleapis.com/css?family=Nunito');
+ color:#151515;
+ margin:0px;
+}
+
+a {
+	text-decoration:none;
+	color:#44BFBF;
+}
+
+/* HOME PAGE */
+
+#home-header {
+	height:7em;
+	width:100%;
+	background:#45BFBF;
+	margin-bottom:2em;
+	display:table;
+	line-height:1.8em;
+}
+
+#home-header-content {
+	display:table-cell;
+	vertical-align:middle;
+ 	text-align:center;
+ 	color:white;
+}
+
+#home-title {
+	letter-spacing:0.18em;
+	font-size:1.4em;
+	font-weight:900;
+}
+
+#home-subtitle {
+	letter-spacing:0.1em;
+	font-size:1.2em;
+	opacity:0.8;
+}
+
+#home-content {
+	text-align:center;
+	margin:auto;
+	max-width:78em;
+}
+
+.tile-container {
+	position:relative;
+	width:24em;
+	height:18em;
+	margin:0.5em;
+	display:inline-block;
+  	border-radius:0.4em;
+}
+
+.overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  transition: .2s ease;
+  background-color: rgba(68,191,191,0.9);
+  border-radius:0.4em;
+}
+
+.overlay-text {
+  color: white;
+  font-size: 1.4em;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.tile-container:hover .overlay {
+	box-shadow: 0px 0px 5px #ccc;
+	cursor:pointer;
+	opacity:1;
+	filter: contrast(110%);
+}
+
+.tile-image {
+	display: block;
+  	width: 100%;
+  	height: auto;
+  	border-radius:0.4em;
+}
+
+.pink {
+	background-color:rgba(249,109,164,0.9);
+}
+
+.yellow {
+	background-color:rgba(234,180,63,0.9);
+}
+
+.green {
+	background-color:rgba(50,151,124,0.9);
+}
+
+/* CONTENT PAGE */
+
+.page-title {
+	font-size:1em;
+	letter-spacing:0.15em;
+	opacity:0.8;
+}
+
+/* CONTENT PAGE -> ARTICLE */
+
+#article-header {
+	background-color:#FEE2ED;
+	text-align:center;
+	margin:auto;
+	padding-bottom:2em;
+}
+
+#article-title {
+	padding-top:2em;
+	padding-bottom:0.2em;
+	font-size: 3em;
+	padding-left:0.5em;
+	padding-right:0.5em;
+}
+
+#article-subtitle {
+	font-weight:100;
+	font-size:1.5em;
+	line-height:1.2em;
+	letter-spacing:0.15em;
+	padding-left:0.75em;
+	padding-right:0.75em;
+}
+
+#article-content {
+	padding:1em;
+	text-align:center;
+	margin:auto;
+	max-width:40em;
+	margin-bottom:4em;
+}
+
+.article-content {
+	padding:1em;
+	text-align:center;
+	margin:auto;
+	max-width:40em;
+	margin-bottom:4em;
+}
+
+.video-content {
+	text-align:center;
+	margin:auto;
+	max-width:56em;
+	margin-top:-3em;
+}
+
+.video-link {
+	max-width:94%;
+}
+
+.article-hero {
+	width:100%;
+}
+
+.article-image {
+	max-width:100%;
+	margin-top:2em;
+	margin-bottom:2em;
+	max-height:30em;
+}
+
+a:hover {
+opacity:0.7;
+}
+
+.caption {
+	margin-top:-1.8em;
+	opacity:0.5;
+	font-size:0.8em;
+	width:100%;
+	margin-bottom:2em;
+	text-align:center;
+}
+
+.article-header {
+	font-weight:bold;
+	margin-top:2em;
+}
+
+p.content {
+	line-height:1.6em;
+	text-align:left;
+}
+
+ul {
+	text-align:left;
+	margin-left:0px;
+}
+
+li {
+	text-align:left;
+	margin-bottom:1em;
+}
+
+ol {
+	padding-inline-start:2em;
+}
+
+/* CONTENT PAGE -> FOOTER */
+
+#button-footer {
+	max-width:40em;
+	padding:1em;
+	height:2.5em;
+	margin:auto;
+	text-align:center;
+	margin-bottom:1em;
+}
+
+#back {
+	float:left;
+	color:#44BFBF;
+	background-color:white;
+	border:1px solid #44BFBF;
+}
+
+#next {
+	float:right;
+	color:white;
+	background-color:#44BFBF;
+}
+
+.button {
+	padding:1em;
+	height:1.2em;	
+	border-radius:0.5em;
+	font-weight:100;
+}
+
+#top-back-button {
+	float:left;
+	color:#44BFBF;
+	background-color:white;
+	margin-left:1em;
+	margin-top:1em;
+	margin-right:auto;
+}
+
+.button:hover {
+	cursor:pointer;
+	opacity:0.7;
+}
+
+/* RESPONSIVE */
+
+@media screen and (max-device-width: 480px) {
+  body {
+  	font-size: 2.2em;
+  }
+  p.content {
+	line-height:1.7em;
+	text-align:left;
+}
+  #article-title {
+  	padding-top:2em;
+  	font-size:2.4em;
+  }
+  #top-back-button {
+  	float:none;
+  	margin:auto;
+  	border-radius:0px;
+  }
+  #button-footer {
+  	height:5em;
+  }
+  .button {
+  	font-size:1.4em;
+  }
+  .overlay {
+  	opacity:1;
+  	height:20%;
+  	border-radius:0px 0px 4px 4px;
+  }
+
+  .video {
+  	max-width:300px;
+  }
+
+  .pink, .yellow, .green {
+	  background-color: rgba(68,191,191,0.9);
+  }
+}
