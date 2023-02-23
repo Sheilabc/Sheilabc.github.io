@@ -377,7 +377,7 @@ li { margin-bottom:8px; } /* Lists */
 	#welcome-message {text-align:center;}
 	.welcome-message-small {display:none;}
 	.welcome-message-small-mobile-version {display:block;}
-	#welcome-image { max-height:600px; float:left; }
+	#welcome-image { height:400px; float:left; }
 	#title-section {
 		display:flex;
 		flex-direction:column;
