@@ -33,7 +33,7 @@
 			<div id="page-content">
 				<img src="./images/graphics/fsl/Field Service Hero Big.jpg" class="content-hero-image"/>
 				<p class="content-page-title">Field Service Lightning</p>
-				<p class="content-page-subtitle">Offered by Salesforce Service Cloud</p>
+				<p class="content-page-subtitle">Salesforce Service Cloud</p>
 
 				<p>I worked as a product designer on the Service Cloud design team at Salesforce on the Field Service Lightning (FSL) product. FSL allows companies to benefit from the power of the Salesforce platform while managing their field service operations. Our customers use FSL to assign jobs to their mobile workers and help them manage their day-to-day operations.</p>
 
@@ -44,39 +44,39 @@
 				<p class="section-header">The need for a list picker</p>
 				<p>Salesforce is a very configurable platform, and admins are able to set up their own custom, filtered lists of standard objects, including service appointments. At the time of this project, Salesforce supported creating lists of service appointments, but V1 of the mobile app did not show them. Customers were asking for this feature so that their mobile workers could see appointments grouped in categories such as &ldquo;High Priority Appointments&rdquo; or &ldquo;Appointments in Northern California.&rdquo; We needed a way to show the admin-configured list views to mobile workers using the mobile app.</p>
 
-				<img src="./images/graphics/fsl/list-picker-admin.png" class="content-image"/>
+				<img src="./images/graphics/fsl/list-picker-admin.png" class="content-image" alt="List picker admin view"/>
 				<p class="content-caption">Existing admin configuration for list pickers in Salesforce FSL Setup</p>
 
-				<img src="./images/graphics/fsl/original-design-list-picker.png" class="content-image"/>
+				<img src="./images/graphics/fsl/original-design-list-picker.png" class="content-image" alt="List picker original design"/>
 				<p class="content-caption">Original app design that didn't show the admin-configured listviews</p>
 
 				<p class="section-header">Designing the list picker</p>
 
 				<p>I started by exploring patterns that we might be able to use to surface a list of service appointments on the &ldquo;Schedule&rdquo; tab in the mobile app. Since it was the most extensible and most closely matched the Salesforce admin experience, I decided to move forward with the dropdown list picker.</p>
 
-				<img src="./images/graphics/fsl/list-picker-explorations.png" class="content-image"/>
+				<img src="./images/graphics/fsl/list-picker-explorations.png" class="content-image" alt="List picker explorations"/>
 				<p class="content-caption">List picker design explorations</p>
 
 				<p>My designs placed the name of the currently-selected list at the center of the navigation bar. However, this displaced the date-picker and current selected day. To handle this, I moved the date picker to button on the top right, and moved by the link to &ldquo;Today&rdquo; and the current date to other locations. I also added &ldquo;Tomorrow&rdquo; based on our understanding that many mobile workers check their work for the upcoming day. I changed the buttons to use icons instead of text so they would be more visually distinct from the new text in the navigation bar.</p>
 
 				<p>We were also able to move the map into the same view as the list of service appointments, so users could see both the location and the details of the appointments at once. The following image and video show the current implementation of this feature.</p>
 
-				<img src="./images/graphics/fsl/sample_spec.jpg" class="content-image"/>
+				<img src="./images/graphics/fsl/sample_spec.jpg" class="content-image" alt="FSL sample spec"/>
 				<p class="content-caption">Part of the list picker design spec</p>
 
-				<div style="display: flex; justify-content: center; align-items: center;"><img src="./images/graphics/fsl/list-picker.gif" class="content-image"/></div>
+				<div style="display: flex; justify-content: center; align-items: center;"><img src="./images/graphics/fsl/list-picker.gif" class="content-image"  alt="List picker recording"/></div>
 				<p class="content-caption">Implemented list picker design</p>
 
 				<p class="section-header">The need for time sheets</p>
 
 				<p>Companies need to track how much time mobile workers spend on various tasks throughout the day in order to pay them and to bill their customers correctly. FSL already provides standard objects that Salesforce admins can use to keep track of time sheet data, but there is currently no out-of-the-box UI that supports this feature in our mobile app. The ability to manage time sheets is one of our top requests from customers.</p>
 
-				<img src="./images/graphics/fsl/fsl-hero.png" class="content-image"/>
+				<img src="./images/graphics/fsl/fsl-hero.png" class="content-image" alt="FSL hero image"/>
 				<p class="content-caption">My design for a time sheets feature in Salesforce Field Service Lightning</p>
 
 				<p>For this project, we considered how three of our personas had slightly different needs. Mobile workers need to track their time, and also ensure that they submit accurate time sheets. Managers need to review and approve time sheets. Admins need to configure FSL to match how their company handles time sheets.</p>
 
-				<img src="./images/graphics/fsl/user-scenarios.png" class="content-image"/>
+				<img src="./images/graphics/fsl/user-scenarios.png" class="content-image" alt="User scenarios"/>
 				<p class="content-caption">Time sheets user scenarios</p>
 
 				<p class="section-header">Designing time sheets</p>
@@ -85,35 +85,35 @@
 
 				<p>I started by exploring other time tracking tools. I quickly began noticing common features, and also discovered key concepts such as wage codes (i.e. how time should be charged) and billing rates. I also noticed that time tracking was often bundled together with the ability to track expenses and produce invoices, which later turned out to be a common need for our customers as well.</p>
 
-				<img src="./images/graphics/fsl/competitive-analysis.png" class="content-image"/>
+				<img src="./images/graphics/fsl/competitive-analysis.png" class="content-image" alt="Competitive analysis"/>
 				<p class="content-caption">Examples of other time tracking tools</p>
 
 				<p>I understood time sheets in two parts: time tracking, and time sheet submission. I reached out to the other designers on my team for feedback on my early sketches, and then moved quickly into creating a mid-fi prototype that I could test with real field service mobile workers. Having a design to show during user testing helped guide the participants and helped reveal key research questions. In this design, I included the ability for a mobile worker to start and stop a clock to track their time. The mobile workers could also access their time sheets in the app, and submit them to their manager.</p>
 
-				<img src="./images/graphics/fsl/early_sketches.png" class="content-image"/>
+				<img src="./images/graphics/fsl/early_sketches.png" class="content-image" alt="Early sketches"/>
 				<p class="content-caption">Sketching concepts for the visionary exercise</p>
 
 				<p>I learned from our research that mobile workers really want to be able to manually edit what time is entered on their time sheet. They are frequently distracted by the task of going to a job site, and may forget to start or stop a clock. They didn&lsquo;t want to feel like they were tied to a punch clock, or were being automatically tracked. The workers also pointed out that they often round their start or stop estimates to the nearest 15-minute mark, to avoid awkward numbers when billing customers.</p>
 
-				<img src="./images/graphics/fsl/early-feedback.png" class="content-image"/>
+				<img src="./images/graphics/fsl/early-feedback.png" class="content-image" alt="Early feedback"/>
 				<p class="content-caption">Participants were not a fan of designs that looked like a punch clock</p>
 
 				<p>I was later joined by a new designer and a new PM. We worked together to develop a shared understanding of the problem by conducting discovery interviews, defining user flows, and iteratively designing a solution for the mobile experience. We then worked with our researcher to set up another round of user testing.</p>
 
 				<p>One of our research questions was how to best show a time sheet in the app. I had a hypothesis that users would want to see how much of their time was spent in overtime, which could be shown as a pie chart. Another idea was to show users their time represented as a bar chart of time worked per day. Users much preferred the bar chart, because it gave them a quick way to gauge whether any time was missing from the time sheet, and also aligned well with how they remembered spending their time.</p>
 
-				<img src="./images/graphics/fsl/graph-feedback.png" class="content-image"/>
+				<img src="./images/graphics/fsl/graph-feedback.png" class="content-image" alt="Feedback"/>
 				<p class="content-caption">Users preferred seeing their time as a bar chart</p>
 
 				<p>I made many prototypes throughout the course of this project. I used Principle to create the following prototype showing the experience for a mobile worker viewing their time sheets on the Android app.</p>
 
-				<img src="./images/graphics/fsl/time_sheets.gif" class="content-image"/>
+				<img src="./images/graphics/fsl/time_sheets.gif" class="content-image" alt="Time sheets"/>
 				<p class="content-caption">Prototype made in Principle</p>
 
 				<p class="section-header">Documentation and working with eng</p>
 				<p>The Field Service mobile app uses a color branding system that avoids any hard-coded colors in the app. Admins can configure any color to match their own company&lsquo;s brand, and even to invert the text and background color to turn on &ldquo;Dark Mode.&rdquo; I used this existing system to communicate the color token assignments with developers building the new feature.</p>
 
-				<img src="./images/graphics/fsl/component_library.png" class="content-image"/>
+				<img src="./images/graphics/fsl/component_library.png" class="content-image" alt="Component library"/>
 				<p class="content-caption">Sketch Component Library Showcasing the FSL Branding System</p>
 
 				<p class="section-header">Reflections</p>
