@@ -10,9 +10,6 @@ body {
 	color:#151515; /* Slightly gray text by default*/
 	margin:0px; /* Page margin*/
 	background-color:#ffffff; /* Page color */
-	height:100%;
-	display:flex;
-	flex-direction:column;
 }
 
 p { margin-bottom:8px; } /* Add a nice space between paragraphs */
