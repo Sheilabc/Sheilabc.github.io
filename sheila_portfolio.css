@@ -183,7 +183,7 @@ img { object-fit:contain; height:auto; } /* Never squish images */
 .content-image {
 	margin:auto; /* Center images */
 	max-height:540px;
-	max-width:600px;	
+	max-width:640px;	
 	margin-top:40px;
 }
 

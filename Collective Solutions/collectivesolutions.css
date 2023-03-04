@@ -1,0 +1,72 @@
+html {}
+body {
+	font-family: 'Montserrat', Arial;
+	font-size:14px;
+	line-height:1.5em;
+}
+
+#content {
+	max-width:900px;
+	margin:auto;
+}
+
+#wide-content {
+	max-width:1200px;
+	margin:auto;	
+}
+
+a { text-decoration:none; color:inherit; }/* Don't stylize links */
+a:hover { opacity:0.9; } /* Give links a little feedback */
+
+#header-links { padding: 20px 80px; height:80px; }
+
+.left-header-actions {
+	float:left;
+	display:flex;
+	flex-direction:row;
+	gap:16px;
+}
+
+.right-header-actions {
+	float:right;
+	display:flex;
+	flex-direction:row;
+	justify-content:flex-end;
+	align-items:center;
+	gap:32px;
+}
+
+.selected{ font-weight:500; text-decoration:underline; }
+
+.project{
+	background:#E6E9ED;
+	border-radius:12px;
+	padding:20px;
+	margin:20px;
+	width:220px;
+}
+
+.projects-list {
+	display:flex;
+	flex-wrap:wrap;
+}
+
+p.h1 {
+font-size:2em;
+}
+
+p.h2 {
+font-size:1.4em;
+}
+
+p.body {
+margin-bottom:2em;
+}
+
+div.spacer-large {
+	height:2em;
+}
+
+div.spacer-small {
+	height:1.5em;
+}
