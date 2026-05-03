@@ -15,11 +15,11 @@
      ------------------------------------------------------------- */
 
   :root {
-    --envelope-bg: #1a1a1f;        /* envelope body — deep charcoal */
-    --envelope-shadow: #0d0d11;    /* crease / shadow tone */
-    --flap: #24242b;               /* back flap (slightly lighter) */
-    --wax: #b8892b;                /* wax seal — antique gold */
-    --wax-dark: #7a5a17;
+    --envelope-bg: #c9a34a;        /* envelope body — warm gold */
+    --envelope-shadow: #7a5a17;    /* crease / shadow tone — deep gold */
+    --flap: #dcb75c;               /* back flap (lighter champagne gold) */
+    --wax: #6e1a1f;                /* wax seal — oxblood red on gold */
+    --wax-dark: #3a0a0d;
     --card-bg: #faf6ee;            /* card paper — warm cream */
     --card-edge: #e6dcc5;
     --ink: #1a1a1f;
@@ -153,7 +153,7 @@
     transform: translate(-50%, -50%);
     border-radius: 50%;
     background:
-      radial-gradient(circle at 35% 30%, #e4b859 0%, var(--wax) 45%, var(--wax-dark) 100%);
+      radial-gradient(circle at 35% 30%, #b83740 0%, var(--wax) 45%, var(--wax-dark) 100%);
     box-shadow:
       0 6px 14px rgba(0,0,0,.5),
       inset 0 -6px 12px rgba(0,0,0,.35),
@@ -528,10 +528,10 @@
   "name": "Shah",
   "milestoneWord": "forty",
   "cardTitle": "Shah's 40th birthday",
-  "occasion": "Fortieth Birthday",
-  "subtitle": "Four decades of one extraordinary guy!",
+  "occasion": "Shah's Fortieth Birthday",
+  "subtitle": "Four decades of one extraordinary guy.",
   "date": "Saturday, June 6th",
-  "time": "1:00 PM",
+  "time": "2:00 PM",
   "locationLabel": "Location",
   "location": "Our home in Millbrae",
   "locationDetail": "",
@@ -549,6 +549,7 @@
       <!-- the card peeks out when the flap opens -->
       <article class="card" id="card" aria-hidden="true">
         <h1 data-slot="cardTitle">Name's birthday</h1>
+        <p class="sub" data-slot="subtitle">subtitle</p>
         <div class="divider-ornament" aria-hidden="true">
           <span class="line"></span>
           <span class="diamond">◆</span>
@@ -608,8 +609,9 @@
   const setSlot = (key, value) => {
     document.querySelectorAll(`[data-slot="${key}"]`).forEach(el => { el.textContent = value; });
   };
+  setSlot('milestone', config.milestoneWord || 'forty');
   setSlot('name', config.name);
-  setSlot('cardTitle', config.cardTitle || `${config.name}'s 40th birthday`);
+  setSlot('cardTitle', config.cardTitle || `${config.name}'s birthday`);
   setSlot('subtitle', config.subtitle);
   setSlot('when', `${config.date} · ${config.time}`);
   setSlot('locationLabel', config.locationLabel || 'Location');
