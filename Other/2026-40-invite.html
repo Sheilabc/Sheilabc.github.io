@@ -549,7 +549,6 @@
       <!-- the card peeks out when the flap opens -->
       <article class="card" id="card" aria-hidden="true">
         <h1 data-slot="cardTitle">Name's birthday</h1>
-        <p class="sub" data-slot="subtitle">subtitle</p>
         <div class="divider-ornament" aria-hidden="true">
           <span class="line"></span>
           <span class="diamond">◆</span>
@@ -609,7 +608,6 @@
   const setSlot = (key, value) => {
     document.querySelectorAll(`[data-slot="${key}"]`).forEach(el => { el.textContent = value; });
   };
-  setSlot('milestone', config.milestoneWord || 'forty');
   setSlot('name', config.name);
   setSlot('cardTitle', config.cardTitle || `${config.name}'s 40th birthday`);
   setSlot('subtitle', config.subtitle);
