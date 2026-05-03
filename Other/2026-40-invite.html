@@ -66,9 +66,15 @@
     position: absolute;
     inset: 0;
     border-radius: 10px;
+    overflow: hidden;
     box-shadow:
       0 30px 60px -20px rgba(0,0,0,.35),
       0 10px 20px -10px rgba(0,0,0,.25);
+  }
+  .flap-layer {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
   }
 
   /* back of the envelope (where the card sits) */
@@ -545,23 +551,25 @@
   <div class="scene" id="scene" role="button" tabindex="0" aria-label="Open the envelope">
     <div class="envelope">
       <div class="back"></div>
-
-      <!-- the card peeks out when the flap opens -->
-      <article class="card" id="card" aria-hidden="true">
-        <h1 data-slot="cardTitle">Name's birthday</h1>
-        <p class="sub" data-slot="subtitle">subtitle</p>
-        <div class="divider-ornament" aria-hidden="true">
-          <span class="line"></span>
-          <span class="diamond">◆</span>
-          <span class="line"></span>
-        </div>
-        <p class="detail"><span data-slot="when">Date · Time</span></p>
-        <p class="detail"><span data-slot="location">Location</span></p>
-      </article>
-
       <div class="side-left"></div>
       <div class="side-right"></div>
       <div class="pocket"></div>
+    </div>
+
+    <!-- the card peeks out when the flap opens -->
+    <article class="card" id="card" aria-hidden="true">
+      <h1 data-slot="cardTitle">Name's birthday</h1>
+      <p class="sub" data-slot="subtitle">subtitle</p>
+      <div class="divider-ornament" aria-hidden="true">
+        <span class="line"></span>
+        <span class="diamond">◆</span>
+        <span class="line"></span>
+      </div>
+      <p class="detail"><span data-slot="when">Date · Time</span></p>
+      <p class="detail"><span data-slot="location">Location</span></p>
+    </article>
+
+    <div class="flap-layer">
       <div class="flap"></div>
       <div class="seal" aria-hidden="true"><span class="monogram">S</span></div>
     </div>
