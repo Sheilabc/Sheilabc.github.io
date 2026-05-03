@@ -549,7 +549,6 @@
       <!-- the card peeks out when the flap opens -->
       <article class="card" id="card" aria-hidden="true">
         <h1 data-slot="cardTitle">Name's birthday</h1>
-        <div class="forty" data-slot="milestone">forty</div>
         <p class="sub" data-slot="subtitle">subtitle</p>
         <div class="divider-ornament" aria-hidden="true">
           <span class="line"></span>
@@ -612,7 +611,7 @@
   };
   setSlot('milestone', config.milestoneWord || 'forty');
   setSlot('name', config.name);
-  setSlot('cardTitle', config.cardTitle || `${config.name}'s birthday`);
+  setSlot('cardTitle', config.cardTitle || `${config.name}'s 40th birthday`);
   setSlot('subtitle', config.subtitle);
   setSlot('when', `${config.date} · ${config.time}`);
   setSlot('locationLabel', config.locationLabel || 'Location');
