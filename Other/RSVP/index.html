@@ -452,6 +452,101 @@
     letter-spacing: .01em;
   }
 
+  /* ---------- RSVP FORM ---------- */
+  .rsvp {
+    margin-top: 18px;
+    display: grid;
+    gap: 14px;
+  }
+  .rsvp label {
+    display: block;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: .3em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 6px;
+  }
+  .rsvp input[type="text"],
+  .rsvp input[type="number"],
+  .rsvp textarea {
+    width: 100%;
+    font-family: 'Lato', sans-serif;
+    font-size: 15px;
+    color: var(--ink);
+    background: #fff;
+    border: 1px solid var(--card-edge);
+    border-radius: 6px;
+    padding: 10px 12px;
+    outline: none;
+    transition: border-color 180ms ease, box-shadow 180ms ease;
+  }
+  .rsvp input:focus,
+  .rsvp textarea:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(184,137,43,.15);
+  }
+  .rsvp textarea { min-height: 72px; resize: vertical; }
+  .rsvp .attending-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .rsvp .attend-btn {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 17px;
+    background: #fff;
+    color: var(--ink);
+    border: 1px solid var(--card-edge);
+    border-radius: 6px;
+    padding: 12px;
+    cursor: pointer;
+    transition: all 180ms ease;
+  }
+  .rsvp .attend-btn:hover { border-color: var(--accent); }
+  .rsvp .attend-btn.selected {
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--accent);
+  }
+  .rsvp .guest-row { display: none; }
+  .rsvp.is-attending .guest-row { display: block; }
+  .rsvp .submit {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 500;
+    font-size: 18px;
+    letter-spacing: .02em;
+    background: var(--wax);
+    color: #fff5dc;
+    border: 0;
+    border-radius: 6px;
+    padding: 14px 20px;
+    cursor: pointer;
+    transition: background 180ms ease, transform 120ms ease;
+    margin-top: 4px;
+  }
+  .rsvp .submit:hover { background: var(--wax-dark); }
+  .rsvp .submit:active { transform: translateY(1px); }
+  .rsvp .submit:disabled { opacity: .5; cursor: not-allowed; }
+  .rsvp .error {
+    color: var(--wax);
+    font-size: 13px;
+    text-align: center;
+    min-height: 18px;
+  }
+  .rsvp-success {
+    text-align: center;
+    padding: 20px 10px;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 22px;
+    color: var(--accent);
+    display: none;
+  }
+  .rsvp-success.visible { display: block; }
+
   /* ---------- FOOTER ---------- */
   .site-footer {
     text-align: center;
@@ -600,7 +695,33 @@
       <span class="line"></span>
     </div>
     <p class="reply-lede">Please let us know if you can make it.</p>
-    <p class="reply-call">Text <span class="reply-name" data-slot="hostNames">Sheila or Shah</span></p>
+  </div>
+
+  <form class="rsvp" id="rsvpForm" novalidate>
+    <div>
+      <label for="rsvpName">Your name</label>
+      <input type="text" id="rsvpName" name="name" autocomplete="name" required />
+    </div>
+
+    <div>
+      <label>Will you be there?</label>
+      <div class="attending-row">
+        <button type="button" class="attend-btn" data-attending="yes">Joyfully yes</button>
+        <button type="button" class="attend-btn" data-attending="no">Regretfully no</button>
+      </div>
+    </div>
+
+    <div class="guest-row">
+      <label for="rsvpGuests">Total in your party (including you)</label>
+      <input type="number" id="rsvpGuests" name="guests" min="1" max="10" value="1" />
+    </div>
+
+    <button type="submit" class="submit" id="rsvpSubmit" disabled>Send reply</button>
+    <div class="error" id="rsvpError" role="alert"></div>
+  </form>
+
+  <div class="rsvp-success" id="rsvpSuccess">
+    Thank you — your reply has been received.
   </div>
 </section>
 
@@ -609,6 +730,68 @@
 </footer>
 
 <div class="confetti" id="confetti" aria-hidden="true"></div>
+
+<script type="module">
+  // ---------- SUPABASE CONFIG ----------
+  // Paste values from Supabase → Settings → API.
+  // The anon key is safe to ship in the browser — RLS protects the data.
+  const SUPABASE_URL = 'https://htghkxrvvdggkztywnrk.supabase.co';
+  const SUPABASE_ANON_KEY = 'sb_publishable_DcG1mc5crBGbX8jS-xVseQ_nFVMJ_6P';
+
+  import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
+  const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  const form = document.getElementById('rsvpForm');
+  const nameInput = document.getElementById('rsvpName');
+  const guestsInput = document.getElementById('rsvpGuests');
+  const submitBtn = document.getElementById('rsvpSubmit');
+  const errorEl = document.getElementById('rsvpError');
+  const successEl = document.getElementById('rsvpSuccess');
+  const attendBtns = document.querySelectorAll('.attend-btn');
+  let attending = null;
+
+  const updateSubmitState = () => {
+    submitBtn.disabled = !(nameInput.value.trim() && attending !== null);
+  };
+
+  attendBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      attendBtns.forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      attending = btn.dataset.attending === 'yes';
+      form.classList.toggle('is-attending', attending);
+      updateSubmitState();
+    });
+  });
+
+  nameInput.addEventListener('input', updateSubmitState);
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    errorEl.textContent = '';
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending…';
+
+    const payload = {
+      name: nameInput.value.trim(),
+      attending,
+      guest_count: attending ? Math.max(1, parseInt(guestsInput.value, 10) || 1) : 0,
+    };
+
+    const { error } = await supabase.from('rsvps').insert(payload);
+
+    if (error) {
+      errorEl.textContent = 'Something went wrong. Please try again or text the hosts.';
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Send reply';
+      console.error(error);
+      return;
+    }
+
+    form.style.display = 'none';
+    successEl.classList.add('visible');
+  });
+</script>
 
 <script>
   const config = JSON.parse(document.getElementById('config').textContent);
@@ -686,35 +869,6 @@
     host.appendChild(frag);
   }
 </script>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-<script>
-  // 1. Initialize the connection
-  // Vercel will automatically inject these if you named them correctly in settings
-  const supabaseUrl = 'https://htghkxrvvdggkztywnrk.supabase.co'
-  const supabaseKey = 'sb_publishable_DcG1mc5crBGbX8jS-xVseQ_nFVMJ_6P'
-  const supabase = supabasejs.createClient(supabaseUrl, supabaseKey)
-
-  // 2. Handle the RSVP
-  async function handleRSVP(event) {
-    event.preventDefault(); // Stop page from refreshing
-    
-    const name = document.getElementById('guest-name').value;
-    const attending = document.getElementById('attending-status').checked;
-    const notes = document.getElementById('dietary-notes').value;
-
-    const { data, error } = await supabase
-      .from('rsvps')
-      .insert([{ name, attending, dietary_restrictions: notes }]);
-
-    if (error) {
-      console.error('Error:', error);
-      alert('Something went wrong. Please try again!');
-    } else {
-      // Transition UI to Success State
-      document.getElementById('rsvp-form').innerHTML = "<h2>See you there! 🥂</h2>";
-    }
-  }
-</script>
 </body>
 </html>
