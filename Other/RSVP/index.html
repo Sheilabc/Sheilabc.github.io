@@ -686,6 +686,35 @@
     host.appendChild(frag);
   }
 </script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
+<script>
+  // 1. Initialize the connection
+  // Vercel will automatically inject these if you named them correctly in settings
+  const supabaseUrl = 'https://htghkxrvvdggkztywnrk.supabase.co'
+  const supabaseKey = 'sb_publishable_DcG1mc5crBGbX8jS-xVseQ_nFVMJ_6P'
+  const supabase = supabasejs.createClient(supabaseUrl, supabaseKey)
+
+  // 2. Handle the RSVP
+  async function handleRSVP(event) {
+    event.preventDefault(); // Stop page from refreshing
+    
+    const name = document.getElementById('guest-name').value;
+    const attending = document.getElementById('attending-status').checked;
+    const notes = document.getElementById('dietary-notes').value;
+
+    const { data, error } = await supabase
+      .from('rsvps')
+      .insert([{ name, attending, dietary_restrictions: notes }]);
+
+    if (error) {
+      console.error('Error:', error);
+      alert('Something went wrong. Please try again!');
+    } else {
+      // Transition UI to Success State
+      document.getElementById('rsvp-form').innerHTML = "<h2>See you there! 🥂</h2>";
+    }
+  }
+</script>
 </body>
 </html>
