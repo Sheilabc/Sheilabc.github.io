@@ -56,9 +56,13 @@
   /* ---------- ENVELOPE ---------- */
   .scene {
     position: relative;
-    width: min(560px, 92vw);
+    width: min(560px, 96vw);
     aspect-ratio: 3 / 2;
     transition: transform 900ms cubic-bezier(.2,.7,.2,1);
+  }
+  @media (max-width: 540px) {
+    .scene { width: 96vw; }
+    .card { padding: 30px 20px 24px; }
   }
   .scene.opened { transform: translateY(-2vh) scale(1.02); }
 
@@ -721,7 +725,8 @@
   </form>
 
   <div class="rsvp-success" id="rsvpSuccess">
-    Thank you — your reply has been received.
+    <p id="rsvpSuccessMessage"></p>
+    <button type="button" class="submit" id="rsvpEdit" style="margin-top: 16px; background: transparent; color: var(--accent); border: 1px solid var(--accent);">Change my reply</button>
   </div>
 </section>
 
@@ -747,8 +752,48 @@
   const submitBtn = document.getElementById('rsvpSubmit');
   const errorEl = document.getElementById('rsvpError');
   const successEl = document.getElementById('rsvpSuccess');
+  const successMsg = document.getElementById('rsvpSuccessMessage');
+  const editBtn = document.getElementById('rsvpEdit');
   const attendBtns = document.querySelectorAll('.attend-btn');
+  const STORAGE_KEY = 'shah40-rsvp';
   let attending = null;
+
+  const showSuccess = (reply) => {
+    const name = reply.name;
+    if (reply.attending) {
+      const count = reply.guest_count || 1;
+      const party = count === 1 ? 'just you' : `${count} guests`;
+      successMsg.textContent = `${name}, we have you down as joyfully attending — ${party}. See you there!`;
+    } else {
+      successMsg.textContent = `${name}, we have your regrets. Thank you for letting us know — you'll be missed.`;
+    }
+    form.style.display = 'none';
+    successEl.classList.add('visible');
+  };
+
+  const showForm = (prefill) => {
+    successEl.classList.remove('visible');
+    form.style.display = '';
+    if (prefill) {
+      nameInput.value = prefill.name || '';
+      if (prefill.attending === true || prefill.attending === false) {
+        attendBtns.forEach(b => b.classList.remove('selected'));
+        const target = document.querySelector(`.attend-btn[data-attending="${prefill.attending ? 'yes' : 'no'}"]`);
+        if (target) target.classList.add('selected');
+        attending = prefill.attending;
+        form.classList.toggle('is-attending', attending);
+      }
+      if (prefill.guest_count) guestsInput.value = prefill.guest_count;
+    }
+    updateSubmitState();
+  };
+
+  const saved = (() => {
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY)); } catch { return null; }
+  })();
+  if (saved) showSuccess(saved);
+
+  editBtn.addEventListener('click', () => showForm(saved));
 
   const updateSubmitState = () => {
     submitBtn.disabled = !(nameInput.value.trim() && attending !== null);
@@ -788,8 +833,9 @@
       return;
     }
 
-    form.style.display = 'none';
-    successEl.classList.add('visible');
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(payload)); } catch {}
+    submitBtn.textContent = 'Send reply';
+    showSuccess(payload);
   });
 </script>
 
