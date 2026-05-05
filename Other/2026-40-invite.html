@@ -808,14 +808,6 @@
     updateSubmitState();
   };
 
-  const saved = (() => {
-    try { return JSON.parse(localStorage.getItem(STORAGE_KEY)); } catch { return null; }
-  })();
-  if (saved) showSuccess(saved);
-  else updateSubmitState();
-
-  editBtn.addEventListener('click', () => showForm(saved));
-
   const updateSubmitState = () => {
     const hasName = !!nameInput.value.trim();
     const hasAttending = attending !== null;
@@ -827,6 +819,14 @@
     else if (!hasAttending) msg = 'Choose yes or no to send your reply.';
     hintEl.textContent = msg;
   };
+
+  const saved = (() => {
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY)); } catch { return null; }
+  })();
+  if (saved) showSuccess(saved);
+  else updateSubmitState();
+
+  editBtn.addEventListener('click', () => showForm(saved));
 
   attendBtns.forEach(btn => {
     btn.addEventListener('click', () => {
