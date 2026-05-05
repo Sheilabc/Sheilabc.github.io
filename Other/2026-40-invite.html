@@ -31,8 +31,10 @@
 
   * { box-sizing: border-box; }
   html, body { height: 100%; }
+  html { overflow-x: hidden; }
   body {
     margin: 0;
+    width: 100%;
     font-family: 'Lato', system-ui, sans-serif;
     font-weight: 400;
     color: var(--ink);
@@ -49,19 +51,20 @@
     min-height: 100dvh;
     display: grid;
     place-items: center;
-    padding: 24px;
+    padding: 28vh 24px 24px;
     perspective: 1800px;
   }
 
   /* ---------- ENVELOPE ---------- */
   .scene {
     position: relative;
-    width: min(560px, 96vw);
+    width: 100%;
+    max-width: 560px;
+    margin-inline: auto;
     aspect-ratio: 3 / 2;
     transition: transform 900ms cubic-bezier(.2,.7,.2,1);
   }
   @media (max-width: 540px) {
-    .scene { width: 96vw; }
     .card { padding: 30px 20px 24px; }
   }
   .scene.opened { transform: translateY(-2vh) scale(1.02); }
@@ -346,7 +349,7 @@
   /* ---------- PANEL (details + rsvp) ---------- */
   .panel {
     max-width: 520px;
-    width: 92vw;
+    width: calc(100% - 32px);
     margin: 40px auto 60px;
     background: var(--card-bg);
     border: 1px solid var(--card-edge);
@@ -470,6 +473,21 @@
     text-transform: uppercase;
     color: var(--accent);
     margin-bottom: 6px;
+  }
+  .rsvp label .req {
+    color: var(--wax);
+    margin-left: 4px;
+    letter-spacing: 0;
+  }
+  .rsvp .hint-line {
+    text-align: center;
+    font-family: 'Lato', sans-serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 13px;
+    color: var(--muted);
+    min-height: 18px;
+    margin-top: -4px;
   }
   .rsvp input[type="text"],
   .rsvp input[type="number"],
@@ -703,12 +721,12 @@
 
   <form class="rsvp" id="rsvpForm" novalidate>
     <div>
-      <label for="rsvpName">Your name</label>
-      <input type="text" id="rsvpName" name="name" autocomplete="name" required />
+      <label for="rsvpName">Your name<span class="req" aria-hidden="true">*</span></label>
+      <input type="text" id="rsvpName" name="name" autocomplete="name" placeholder="So we know who's replying" required />
     </div>
 
     <div>
-      <label>Will you be there?</label>
+      <label>Will you be there?<span class="req" aria-hidden="true">*</span></label>
       <div class="attending-row">
         <button type="button" class="attend-btn" data-attending="yes">Joyfully yes</button>
         <button type="button" class="attend-btn" data-attending="no">Regretfully no</button>
@@ -720,6 +738,7 @@
       <input type="number" id="rsvpGuests" name="guests" min="1" max="10" value="1" />
     </div>
 
+    <div class="hint-line" id="rsvpHint" aria-live="polite"></div>
     <button type="submit" class="submit" id="rsvpSubmit" disabled>Send reply</button>
     <div class="error" id="rsvpError" role="alert"></div>
   </form>
@@ -755,6 +774,7 @@
   const successMsg = document.getElementById('rsvpSuccessMessage');
   const editBtn = document.getElementById('rsvpEdit');
   const attendBtns = document.querySelectorAll('.attend-btn');
+  const hintEl = document.getElementById('rsvpHint');
   const STORAGE_KEY = 'shah40-rsvp';
   let attending = null;
 
@@ -792,11 +812,20 @@
     try { return JSON.parse(localStorage.getItem(STORAGE_KEY)); } catch { return null; }
   })();
   if (saved) showSuccess(saved);
+  else updateSubmitState();
 
   editBtn.addEventListener('click', () => showForm(saved));
 
   const updateSubmitState = () => {
-    submitBtn.disabled = !(nameInput.value.trim() && attending !== null);
+    const hasName = !!nameInput.value.trim();
+    const hasAttending = attending !== null;
+    submitBtn.disabled = !(hasName && hasAttending);
+
+    let msg = '';
+    if (!hasName && !hasAttending) msg = 'Add your name and choose yes or no to send your reply.';
+    else if (!hasName) msg = 'Add your name to send your reply.';
+    else if (!hasAttending) msg = 'Choose yes or no to send your reply.';
+    hintEl.textContent = msg;
   };
 
   attendBtns.forEach(btn => {
